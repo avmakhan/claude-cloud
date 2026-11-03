@@ -1,0 +1,5 @@
+# Astro geeft deze bestanden een unieke naam per versie (bijv. index.a1b2c3.css),
+# dus ze mogen een jaar in de browsercache blijven.
+<IfModule mod_headers.c>
+  Header set Cache-Control "public, max-age=31536000, immutable"
+</IfModule>

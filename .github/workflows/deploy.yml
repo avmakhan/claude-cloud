@@ -1,0 +1,43 @@
+# Bouwt de site bij elke push naar main en zet het resultaat (de map dist/)
+# op de branch "deploy". Hostinger haalt die branch binnen via Git-deployment.
+name: Bouwen en deployen
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch: # handmatig starten via het tabblad Actions
+
+permissions:
+  contents: write
+
+concurrency:
+  group: deploy
+  cancel-in-progress: true
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Code ophalen
+        uses: actions/checkout@v4
+
+      - name: Node.js installeren
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Dependencies installeren
+        run: npm ci
+
+      - name: Site bouwen
+        run: npm run build
+
+      - name: Naar de deploy-branch pushen
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_dir: ./dist
+          publish_branch: deploy
+          force_orphan: true # alleen de laatste versie bewaren, zonder oude geschiedenis
+          commit_message: 'Deploy'

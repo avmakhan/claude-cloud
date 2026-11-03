@@ -1,0 +1,45 @@
+---
+// De basislayout: header, menu en footer staan hier één keer.
+// Elke pagina gebruikt deze layout en vult alleen de inhoud in.
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import { SITE_NAAM, SITE_BESCHRIJVING } from '../consts';
+import '../styles/global.css';
+
+interface Props {
+  titel?: string;
+  beschrijving?: string;
+}
+
+const { titel, beschrijving = SITE_BESCHRIJVING } = Astro.props;
+const volledigeTitel = titel ? `${titel} | ${SITE_NAAM}` : SITE_NAAM;
+const canonicalURL = new URL(Astro.url.pathname, Astro.site);
+---
+
+<!doctype html>
+<html lang="nl">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{volledigeTitel}</title>
+    <meta name="description" content={beschrijving} />
+    <link rel="canonical" href={canonicalURL} />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="sitemap" href="/sitemap-index.xml" />
+
+    <!-- Open Graph: hoe de pagina eruitziet als je hem deelt op social media -->
+    <meta property="og:type" content="website" />
+    <meta property="og:title" content={volledigeTitel} />
+    <meta property="og:description" content={beschrijving} />
+    <meta property="og:url" content={canonicalURL} />
+    <meta property="og:site_name" content={SITE_NAAM} />
+  </head>
+  <body>
+    <a class="skip-link" href="#inhoud">Naar inhoud</a>
+    <Header />
+    <main id="inhoud" class="container">
+      <slot />
+    </main>
+    <Footer />
+  </body>
+</html>

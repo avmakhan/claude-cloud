@@ -1,0 +1,24 @@
+---
+import Basis from '../../layouts/Basis.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.concept)).sort(
+  (a, b) => b.data.datum.valueOf() - a.data.datum.valueOf(),
+);
+const datumFormaat = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long' });
+---
+
+<Basis titel="Blog" beschrijving="Alle blogposts.">
+  <h1>Blog</h1>
+  <ul class="postlijst">
+    {posts.map((post) => (
+      <li>
+        <a href={`/blog/${post.id}/`}>{post.data.titel}</a>
+        <time datetime={post.data.datum.toISOString()}>
+          {datumFormaat.format(post.data.datum)}
+        </time>
+        <p>{post.data.beschrijving}</p>
+      </li>
+    ))}
+  </ul>
+</Basis>

@@ -1,0 +1,46 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Kaart from '../components/Kaart.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.concept))
+  .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+  .slice(0, 3);
+---
+
+<Basis>
+  <section class="hero">
+    <h1>Welkom op mijn website</h1>
+    <p class="lead">
+      Dit is een voorbeeldproject in Astro. Alle pagina's delen dezelfde layout,
+      en blogposts zijn gewone Markdown-bestanden.
+    </p>
+    <a class="knop" href="/contact/">Neem contact op</a>
+  </section>
+
+  <section>
+    <h2>Wat ik doe</h2>
+    <div class="raster">
+      <Kaart titel="Snel">
+        <p>Statische HTML laadt razendsnel, zonder database of server-code.</p>
+      </Kaart>
+      <Kaart titel="Veilig">
+        <p>Er draait niets op de server dat gehackt kan worden.</p>
+      </Kaart>
+      <Kaart titel="Makkelijk te onderhouden">
+        <p>Header en footer staan op één plek. Eén wijziging, overal bijgewerkt.</p>
+      </Kaart>
+    </div>
+  </section>
+
+  <section>
+    <h2>Laatste blogposts</h2>
+    <div class="raster">
+      {posts.map((post) => (
+        <Kaart titel={post.data.titel} href={`/blog/${post.id}/`}>
+          <p>{post.data.beschrijving}</p>
+        </Kaart>
+      ))}
+    </div>
+  </section>
+</Basis>

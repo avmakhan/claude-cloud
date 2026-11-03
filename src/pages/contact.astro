@@ -1,0 +1,13 @@
+---
+import Basis from '../layouts/Basis.astro';
+import { CONTACT_EMAIL } from '../consts';
+---
+
+<Basis titel="Contact" beschrijving="Neem contact met mij op.">
+  <h1>Contact</h1>
+  <p>Stuur een e-mail naar <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.</p>
+  <p class="opmerking">
+    Een statische site kan zelf geen formulieren verwerken. Wil je een contactformulier?
+    Gebruik dan een dienst als Formspree of Web3Forms, of een klein PHP-script op Hostinger.
+  </p>
+</Basis>
