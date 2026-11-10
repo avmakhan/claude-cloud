@@ -10,25 +10,25 @@ const posts = (await getCollection('blog', ({ data }) => !data.concept))
 
 <Basis>
   <section class="hero">
-    <h1>Welkom op mijn website</h1>
+    <h1>Pilot testsite</h1>
     <p class="lead">
-      Dit is een voorbeeldproject in Astro. Alle pagina's delen dezelfde layout,
-      en blogposts zijn gewone Markdown-bestanden.
+      Deze site is een proefproject om te zien hoe alles werkt: van code in GitHub
+      tot een live website op Hostinger.
     </p>
-    <a class="knop" href="/contact/">Neem contact op</a>
+    <a class="knop" href="/over/">Wat wordt er getest?</a>
   </section>
 
   <section>
-    <h2>Wat ik doe</h2>
+    <h2>Zo werkt het</h2>
     <div class="raster">
-      <Kaart titel="Snel">
-        <p>Statische HTML laadt razendsnel, zonder database of server-code.</p>
+      <Kaart titel="1. Aanpassen">
+        <p>Je wijzigt een pagina of schrijft een blogpost in Markdown.</p>
       </Kaart>
-      <Kaart titel="Veilig">
-        <p>Er draait niets op de server dat gehackt kan worden.</p>
+      <Kaart titel="2. Pushen">
+        <p>Je pusht naar GitHub. Een GitHub Action bouwt de site automatisch.</p>
       </Kaart>
-      <Kaart titel="Makkelijk te onderhouden">
-        <p>Header en footer staan op één plek. Eén wijziging, overal bijgewerkt.</p>
+      <Kaart titel="3. Live">
+        <p>Hostinger haalt de nieuwe versie op en de wijziging staat online.</p>
       </Kaart>
     </div>
   </section>
