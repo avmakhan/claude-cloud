@@ -1,0 +1,46 @@
+---
+import Basis from '../layouts/Basis.astro';
+import Kaart from '../components/Kaart.astro';
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog', ({ data }) => !data.concept))
+  .sort((a, b) => b.data.datum.valueOf() - a.data.datum.valueOf())
+  .slice(0, 3);
+---
+
+<Basis>
+  <section class="hero">
+    <h1>Pilot testsite</h1>
+    <p class="lead">
+      Deze site is een proefproject om te zien hoe alles werkt: van code in GitHub
+      tot een live website op Hostinger.
+    </p>
+    <a class="knop" href="/over/">Wat wordt er getest?</a>
+  </section>
+
+  <section>
+    <h2>Zo werkt het</h2>
+    <div class="raster">
+      <Kaart titel="1. Aanpassen">
+        <p>Je wijzigt een pagina of schrijft een blogpost in Markdown.</p>
+      </Kaart>
+      <Kaart titel="2. Pushen">
+        <p>Je pusht naar GitHub. Een GitHub Action bouwt de site automatisch.</p>
+      </Kaart>
+      <Kaart titel="3. Live">
+        <p>Hostinger haalt de nieuwe versie op en de wijziging staat online.</p>
+      </Kaart>
+    </div>
+  </section>
+
+  <section>
+    <h2>Laatste blogposts</h2>
+    <div class="raster">
+      {posts.map((post) => (
+        <Kaart titel={post.data.titel} href={`/blog/${post.id}/`}>
+          <p>{post.data.beschrijving}</p>
+        </Kaart>
+      ))}
+    </div>
+  </section>
+</Basis>

@@ -1,0 +1,26 @@
+---
+import Basis from '../layouts/Basis.astro';
+---
+
+<Basis titel="Over" beschrijving="Waarom deze pilot bestaat en wat er getest wordt.">
+  <h1>Over deze pilot</h1>
+  <p>
+    Deze testsite is gemaakt om de hele workflow uit te proberen voordat er een echte
+    website komt. De inhoud is dus tijdelijk.
+  </p>
+
+  <h2>Wat wordt er getest?</h2>
+  <ul>
+    <li>Een statische site bouwen met Astro</li>
+    <li>Automatisch bouwen met een GitHub Action bij elke push naar <code>main</code></li>
+    <li>Automatisch deployen naar Hostinger via de branch <code>deploy</code></li>
+    <li>HTTPS, caching en beveiligingsheaders via <code>.htaccess</code></li>
+    <li>Blogposts toevoegen als Markdown-bestand</li>
+  </ul>
+
+  <h2>Hierna</h2>
+  <p>
+    Werkt alles? Dan worden de naam, teksten, kleuren en het domein vervangen door die
+    van de echte website.
+  </p>
+</Basis>

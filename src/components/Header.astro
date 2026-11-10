@@ -1,0 +1,24 @@
+---
+import { SITE_NAAM, MENU } from '../consts';
+
+const huidigPad = Astro.url.pathname;
+const isActief = (href: string) =>
+  href === '/' ? huidigPad === '/' : huidigPad.startsWith(href);
+---
+
+<header class="site-header">
+  <div class="container header-inner">
+    <a href="/" class="logo">{SITE_NAAM}</a>
+    <nav aria-label="Hoofdmenu">
+      <ul>
+        {MENU.map((item) => (
+          <li>
+            <a href={item.href} aria-current={isActief(item.href) ? 'page' : undefined}>
+              {item.label}
+            </a>
+          </li>
+        ))}
+      </ul>
+    </nav>
+  </div>
+</header>

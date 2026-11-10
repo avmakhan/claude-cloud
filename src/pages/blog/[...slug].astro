@@ -1,0 +1,23 @@
+---
+// Eén sjabloon voor álle blogposts: Astro maakt hiermee per Markdown-bestand een pagina.
+import Basis from '../../layouts/Basis.astro';
+import { getCollection, render } from 'astro:content';
+
+export async function getStaticPaths() {
+  const posts = await getCollection('blog', ({ data }) => !data.concept);
+  return posts.map((post) => ({ params: { slug: post.id }, props: { post } }));
+}
+
+const { post } = Astro.props;
+const { Content } = await render(post);
+const datumFormaat = new Intl.DateTimeFormat('nl-NL', { dateStyle: 'long' });
+---
+
+<Basis titel={post.data.titel} beschrijving={post.data.beschrijving}>
+  <article class="post">
+    <h1>{post.data.titel}</h1>
+    <time datetime={post.data.datum.toISOString()}>{datumFormaat.format(post.data.datum)}</time>
+    <Content />
+  </article>
+  <p><a href="/blog/">&larr; Alle blogposts</a></p>
+</Basis>

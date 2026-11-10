@@ -1,0 +1,13 @@
+---
+// Een herbruikbaar component: één keer schrijven, overal gebruiken.
+interface Props {
+  titel: string;
+  href?: string;
+}
+const { titel, href } = Astro.props;
+---
+
+<article class="kaart">
+  <h3>{href ? <a href={href}>{titel}</a> : titel}</h3>
+  <slot />
+</article>
