@@ -12,6 +12,9 @@ RewriteRule ^ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
 # --- Eigen 404-pagina ---
 ErrorDocument 404 /404.html
 
+# --- Verborgen bestanden blokkeren (zoals de map .git van Hostinger's Git-deployment) ---
+RedirectMatch 404 /\.(?!well-known)
+
 # --- Geen mappenlijst tonen ---
 Options -Indexes
 
