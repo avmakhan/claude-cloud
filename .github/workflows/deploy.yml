@@ -39,5 +39,6 @@ jobs:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./dist
           publish_branch: deploy
-          force_orphan: true # alleen de laatste versie bewaren, zonder oude geschiedenis
+          # Geen force_orphan: elke build komt bovenop de vorige, zodat Hostinger met een gewone
+          # 'git pull' kan bijwerken.
           commit_message: 'Deploy'
