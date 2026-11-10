@@ -1,10 +1,19 @@
 ---
 import { SITE_NAAM } from '../consts';
-const jaar = new Date().getFullYear();
+
+// Het moment waarop de site gebouwd is. Zo zie je na een push direct of de nieuwe versie online staat.
+const bouwmoment = new Date();
+const jaar = bouwmoment.getFullYear();
+const bijgewerkt = new Intl.DateTimeFormat('nl-NL', {
+  dateStyle: 'long',
+  timeStyle: 'short',
+  timeZone: 'Europe/Amsterdam',
+}).format(bouwmoment);
 ---
 
 <footer class="site-footer">
   <div class="container">
     <p>&copy; {jaar} {SITE_NAAM}. Gebouwd met Astro.</p>
+    <p>Laatst bijgewerkt: <time datetime={bouwmoment.toISOString()}>{bijgewerkt}</time></p>
   </div>
 </footer>

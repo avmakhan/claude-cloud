@@ -162,7 +162,7 @@ main > section + section {
   font-size: 1.2rem;
   font-weight: 600;
 }
-time {
+main time {
   display: block;
   color: var(--gedempt);
   font-size: 0.9rem;
